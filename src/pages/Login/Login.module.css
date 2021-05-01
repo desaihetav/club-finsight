@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.leftContainer {
+  position: relative;
+  background-image: url("https://images.unsplash.com/photo-1482350325005-eda5e677279b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 12rem;
+}
+
+.leftContainerTint {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.logo {
+  width: 20%;
+  margin-right: 1rem;
+}
+
+.leftContainerText {
+  color: white;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 5rem;
+  margin: 0;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 640px;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 30rem;
+}
+
+.title {
+  color: var(--color-text-1);
+  font-size: 2rem;
+  line-height: 3rem;
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--color-text-2);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.input {
+  width: 100%;
+}
+
+.submit {
+  width: 100%;
+  margin: 2rem auto 1rem auto;
+}
+
+input::-webkit-input-placeholder {
+  color: var(--color-text-placeholder);
+}
+
+@media screen and (min-width: 640px) {
+  .container {
+    flex-direction: row;
+  }
+  .leftContainer {
+    height: 100vh;
+    width: 50vw;
+  }
+  .leftContainerTint {
+    background-color: rgba(0, 0, 0, 0.75);
+    flex-direction: column;
+  }
+  .logo {
+    margin-right: 0;
+    margin-bottom: 2rem;
+    width: 35%;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+}

@@ -1,13 +1,41 @@
+@import url("https://csshd.netlify.app/styles/index.css");
+@import "./styles/globals.css";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap");
+
+:root {
+  --color-background-1: #000000ff;
+  --color-background-2: #1c1c1eff;
+  --color-background-3: #2c2c2eff;
+
+  --color-text-1: #ffffffff;
+  --color-text-2: #ebebf599;
+  --color-text-3: #ebebf54d;
+  --color-text-4: #ebebf52e;
+
+  --color-text-placeholder: #ebebf54d;
+
+  --color-seperator: #54545899;
+  --color-seperator-opaque: #38383aff;
+
+  --color-purple-accent: #8e54e9;
+  --color-blue-accent: #4776e6;
+
+  --color-texticon-primary: rgba(255, 255, 255, 0.9);
+  --color-texticon-secondary: rgba(255, 255, 255, 0.65);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background-1);
+  color: var(--color-text-1);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
