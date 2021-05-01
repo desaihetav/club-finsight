@@ -86,7 +86,7 @@ export default function Login() {
                     type="submit"
                     className={`btn btn-solid w-full btn-primary-gradient ${styles.submit}`}
                   >
-                    {loginStatus === "Loading" ? "Loggin In..." : "Login"}
+                    {loginStatus === "LOADING" ? "Loggin In..." : "Login"}
                   </button>
                 </form>
                 <button
