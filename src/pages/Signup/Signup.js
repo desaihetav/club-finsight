@@ -94,24 +94,13 @@ export default function Signup() {
                 )}
                 <div className="space-y-1"></div>
                 <form onSubmit={(e) => handleSignUp(e)}>
-                  <span className="flex">
-                    <input
-                      placeholder="First Name"
-                      className={`input-field ${styles.input}`}
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(() => e.target.value)}
-                    />
-                    <div className="space-x-1"></div>
-                    <div className="space-x-1"></div>
-                    <input
-                      placeholder="Last Name"
-                      className={`input-field ${styles.input}`}
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(() => e.target.value)}
-                    />
-                  </span>
+                  <input
+                    placeholder="Name"
+                    className={`input-field ${styles.input}`}
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(() => e.target.value)}
+                  />
                   <input
                     placeholder="Username"
                     className={`input-field ${styles.input} ${
