@@ -150,7 +150,7 @@ export default function Profile() {
           </div>
         </div>
         <div className={styles.socialsRow}>
-          {twitterId && (
+          {(twitterId || isEditMode) && (
             <div className={styles.socialItem}>
               <img
                 className={styles.icon}

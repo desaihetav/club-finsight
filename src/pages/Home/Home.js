@@ -15,7 +15,7 @@ export default function Home() {
       .collection("users")
       .doc(user.uid)
       .onSnapshot((doc) => {
-        setName(doc.data().firstName);
+        setName(doc.data().name);
       });
 
     return () => {
