@@ -1,0 +1,14 @@
+.completeProfileContainer {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.completeProfileContainer > p:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 640px) {
+  .completeProfileContainer > p {
+    text-align: center;
+  }
+}

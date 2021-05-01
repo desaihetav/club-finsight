@@ -3,9 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap");
 
 :root {
-  --color-background-1: #000000ff;
-  --color-background-2: #1c1c1eff;
-  --color-background-3: #2c2c2eff;
+  --color-background-1: #0a0c0fff;
+  --color-background-2: #1a1c1fff;
+  --color-background-3: #2a2c2fff;
 
   --color-text-1: #ffffffff;
   --color-text-2: #ebebf599;

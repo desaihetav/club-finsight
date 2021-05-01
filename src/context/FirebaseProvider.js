@@ -6,6 +6,9 @@ const FirebaseContext = createContext(null);
 export const useFirebase = () => useContext(FirebaseContext);
 
 export const FirebaseProvider = ({ children }) => {
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("authUser"))
   );
@@ -15,11 +18,15 @@ export const FirebaseProvider = ({ children }) => {
     return () => listener;
   }, []);
 
-  const authListener = () => {
+  const authListener = async () => {
     return firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
         localStorage.setItem("authUser", JSON.stringify(authUser));
-        setUser(authUser);
+        db.collection("users")
+          .doc(authUser.uid)
+          .onSnapshot((doc) => {
+            setUser(doc.data());
+          });
       } else {
         localStorage.removeItem("authUser");
         setUser(null);
@@ -32,8 +39,8 @@ export const FirebaseProvider = ({ children }) => {
       value={{
         user: user,
         firebase: firebase,
-        auth: firebase.auth(),
-        db: firebase.firestore(),
+        auth: auth,
+        db: db,
       }}
     >
       {children}

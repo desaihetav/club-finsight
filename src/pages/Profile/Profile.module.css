@@ -1,0 +1,166 @@
+.profilePage {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileCard {
+  background-color: var(--color-background-2);
+  padding: 2rem;
+  border-radius: 2rem;
+  max-width: 500px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatarContainer {
+  background-color: var(--color-background-3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 42%;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.avatarImage {
+  width: 100%;
+  border-radius: 42%;
+}
+
+.userDetails {
+  max-width: 40vw;
+}
+
+.name {
+  margin: 0.25rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: red;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  border: none;
+  color: inherit;
+}
+
+.username {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 200;
+  color: var(--color-text-2);
+  width: 100%;
+  /* max-width: 50%; */
+}
+
+.bio {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.editIconContainer {
+  padding: 0.75rem;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.editIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.checkIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.website {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.statsRow {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.statItem {
+  margin-right: 1rem;
+}
+
+.statNumber {
+  margin-right: 0.5rem;
+}
+
+.statLabel {
+  color: var(--color-text-2);
+}
+
+.socialsRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.socialItem {
+  margin: 0 1rem 0.5rem 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-2);
+}
+
+.socialItem > p {
+  margin: 0;
+}
+
+.bioActive {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-background-3);
+  width: fit-content;
+}
+
+.bioActive {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.socialUsernameActive {
+  margin-bottom: 1rem;
+}
+
+.inputBox {
+  display: inline;
+  background-color: transparent;
+  color: inherit;
+  outline: none;
+  border: none;
+  min-width: 0;
+  border: 0;
+  outline: none;
+}
+
+.editInput {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-background-3);
+  border: none;
+}

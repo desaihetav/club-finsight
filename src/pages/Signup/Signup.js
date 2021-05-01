@@ -4,8 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import styles from "./Signup.module.css";
 
 export default function Signup() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,15 +45,14 @@ export default function Signup() {
           .doc(user.uid)
           .set({
             uid: user.uid,
-            firstName: firstName,
-            lastName: lastName,
-            initials: (firstName[0] + lastName[0]).toUpperCase(),
+            name: name,
             emailId: email,
             username: username,
             bio: "",
             photoURL: "",
             twitterId: "",
             instagramId: "",
+            website: "",
           });
         console.log(firestoreResponse);
       } catch (error) {
@@ -101,8 +99,8 @@ export default function Signup() {
                       placeholder="First Name"
                       className={`input-field ${styles.input}`}
                       type="text"
-                      value={firstName}
-                      onChange={(e) => setFirstName(() => e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(() => e.target.value)}
                     />
                     <div className="space-x-1"></div>
                     <div className="space-x-1"></div>
@@ -110,8 +108,8 @@ export default function Signup() {
                       placeholder="Last Name"
                       className={`input-field ${styles.input}`}
                       type="text"
-                      value={lastName}
-                      onChange={(e) => setLastName(() => e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(() => e.target.value)}
                     />
                   </span>
                   <input
