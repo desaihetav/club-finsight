@@ -122,21 +122,28 @@ export default function Profile() {
           className={isEditMode ? styles.bioActive : styles.bio}
         ></div>
 
-        <div className={styles.website}>
-          <img className={styles.icon} src="/icons/link.svg" alt="link icon" />
-          {isEditMode ? (
-            <input
-              onChange={(e) => setWebsite(e.target.value)}
-              readOnly={!isEditMode}
-              value={website}
-              className={`${styles.websiteInput} ${styles.inputBox} ${
-                isEditMode && styles.editInput
-              }`}
+        {(website || isEditMode) && (
+          <div className={styles.website}>
+            <img
+              className={styles.icon}
+              src="/icons/link.svg"
+              alt="link icon"
             />
-          ) : (
-            <a href={website}>{website}</a>
-          )}
-        </div>
+            {isEditMode ? (
+              <input
+                placeholder="website_link"
+                onChange={(e) => setWebsite(e.target.value)}
+                readOnly={!isEditMode}
+                value={website}
+                className={`${styles.websiteInput} ${styles.inputBox} ${
+                  isEditMode && styles.editInput
+                }`}
+              />
+            ) : (
+              <a href={website}>{website}</a>
+            )}
+          </div>
+        )}
         <div className={styles.statsRow}>
           <div className={styles.statItem}>
             <span className={styles.statNumber}>
@@ -160,6 +167,7 @@ export default function Profile() {
               <p className={` ${isEditMode && styles.editInput}`}>
                 @
                 <input
+                  placeholder="twitter_id"
                   onChange={(e) => setTwitterId(e.target.value)}
                   readOnly={!isEditMode}
                   className={styles.inputBox}
@@ -178,6 +186,7 @@ export default function Profile() {
               <p className={` ${isEditMode && styles.editInput}`}>
                 @
                 <input
+                  placeholder="instagram_id"
                   onChange={(e) => setInstagramId(e.target.value)}
                   readOnly={!isEditMode}
                   type="text"
