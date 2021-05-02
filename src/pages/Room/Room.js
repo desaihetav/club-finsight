@@ -148,7 +148,7 @@ export default function Room() {
         <Requests user={user} toggleShowRequests={toggleShowRequests} />
       ) : (
         <div
-          style={{ maxHeight: window.innerHeight }}
+          style={{ height: window.innerHeight }}
           className={`${styles.roomContainer}`}
         >
           <div className={`${styles.header}`}>
