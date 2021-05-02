@@ -5,7 +5,7 @@ import styles from "./Profile.module.css";
 
 export default function Profile() {
   const { username } = useParams();
-  const { user, db } = useFirebase();
+  const { user, db, auth } = useFirebase();
   const [currentUser, setCurrentUser] = useState(user);
   const [followers, setFollowers] = useState();
   const [following, setFollowing] = useState();
@@ -198,6 +198,14 @@ export default function Profile() {
           )}
         </div>
       </div>
+      {auth.currentUser && (
+        <button
+          onClick={() => auth.signOut()}
+          className={`btn btn-solid btn-small ${styles.logoutButton}`}
+        >
+          Logout
+        </button>
+      )}
     </div>
   );
 }

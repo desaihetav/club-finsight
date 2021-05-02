@@ -1,15 +1,21 @@
 .card {
   background-color: var(--color-background-2);
-  margin: 2rem auto;
   padding: 2rem;
   border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .title {
-  margin: 0;
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
 }
 
 .subtitle {
+  margin-top: auto;
   margin-bottom: 0;
   font-size: 1rem;
   color: var(--color-text-2);
@@ -17,4 +23,19 @@
 
 .subtitle > span {
   color: var(--color-text-1);
+}
+
+.badge {
+  width: fit-content;
+  padding: 0.125rem 0.5rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.open {
+  background-color: var(--color-status-success);
+}
+
+.scheduled {
+  background-color: var(--color-blue-accent);
 }

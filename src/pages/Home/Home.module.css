@@ -7,6 +7,52 @@
   text-decoration: underline;
 }
 
+.homeHeader {
+  padding: 1rem 1rem 2rem 1rem;
+}
+
+.welcomeMessage {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.roomsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  place-items: stretch;
+  gap: 1.5rem;
+  padding-bottom: 8rem;
+}
+
+.createRoomButtonContainer {
+  width: 100%;
+  background: linear-gradient(to top, var(--color-background-1), transparent);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.createRoomButton {
+  display: flex;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+.createRoomButton > img {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-bottom: 0.125rem;
+}
+
+@media screen and (min-width: 360px) {
+  .roomsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+}
+
 @media screen and (min-width: 640px) {
   .completeProfileContainer > p {
     text-align: center;

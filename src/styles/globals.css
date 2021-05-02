@@ -1,3 +1,4 @@
+@import "react-datetime/css/react-datetime.css";
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -37,4 +38,30 @@
   .input-field {
     width: 100%;
   }
+}
+
+/* DateTime Picker */
+.rdt {
+  background-color: var(--color-background-2);
+  width: fit-content;
+  border-radius: 1rem;
+}
+
+.rdt > input {
+  background-color: var(--color-background-2);
+  color: var(--color-text-1);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+}
+
+.rdtPicker,
+.rdtDays {
+  background-color: var(--color-background-3);
+  border: 0;
+}
+
+.rdtPicker {
+  border-color: transparent;
+  font-family: inherit;
 }

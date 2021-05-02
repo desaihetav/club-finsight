@@ -1,39 +1,25 @@
 import { useFirebase } from "../../context/FirebaseProvider";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import { v4 } from "uuid";
-import { RoomCard } from "../../components";
+import { RoomCard, Navbar } from "../../components";
+import { useRoomData } from "../../context/RoomDataProvider";
 
 export default function Home() {
   const { db, auth, user } = useFirebase();
+  const { allRooms, dispatch } = useRoomData();
   const [showCompleteProfile, setShowCompleteProfile] = useState(true);
 
-  const [rooms, setRooms] = useState([]);
-
-  const createNewRoom = () => {
-    const roomId = v4();
-    db.collection("rooms").doc(roomId).set({
-      id: roomId,
-      title: "How is NextJS framework better as compared to others?",
-      creatorId: user.uid,
-    });
-    db.collection("rooms").doc(roomId).collection("members").doc(user.uid).set({
-      uid: user.uid,
-      name: user.name,
-      username: user.username,
-      role: "creator",
-    });
-    console.log("Room Created");
-  };
-
   const initialiseRooms = () => {
-    return db.collection("rooms").onSnapshot((snapshot) => {
-      const tempRooms = [];
-      snapshot.forEach((doc) => tempRooms.push(doc.data()));
-      console.log(tempRooms);
-      setRooms(tempRooms);
-    });
+    return db
+      .collection("rooms")
+      .orderBy("scheduledAt")
+      .onSnapshot((snapshot) => {
+        const tempRooms = [];
+        snapshot.forEach((doc) => tempRooms.push(doc.data()));
+        dispatch({ type: "INITIALIZE_ALL_ROOMS", payload: tempRooms });
+      });
   };
 
   useEffect(() => {
@@ -43,10 +29,6 @@ export default function Home() {
       unsubscribe();
     };
   }, []);
-
-  const handleLogOut = () => {
-    auth.signOut();
-  };
 
   const isProfileIncomplete =
     user.bio === "" || user.twitterId === "" || user.instagramId === "";
@@ -76,13 +58,25 @@ export default function Home() {
           </div>
         </Link>
       )}
-      <h1>{user?.name}</h1>
-      <button onClick={handleLogOut}>Logout</button>
-      <button onClick={createNewRoom}>Create New Room</button>
-      <div className="container">
-        {rooms?.map(({ id, title, creatorId }) => (
-          <RoomCard key={id} id={id} title={title} creatorId={creatorId} />
-        ))}
+      <Navbar />
+      <div className={`container ${styles.homeHeader}`}>
+        <h1 className={styles.welcomeMessage}>Welcome, {user?.name}</h1>
+        <div className={styles.createRoomButtonContainer}>
+          <Link
+            to="/create-new-room"
+            className={`btn btn-solid btn-small ${styles.createRoomButton}`}
+          >
+            <img src="/icons/add.svg" className="btn-icon-left" alt="add" />
+            Create New Room
+          </Link>
+        </div>
+      </div>
+      <div className={`container ${styles.roomsContainer}`}>
+        {allRooms
+          ?.filter((room) => room.status !== "archieved")
+          .map((room) => (
+            <RoomCard key={room.id} room={room} />
+          ))}
       </div>
     </div>
   );

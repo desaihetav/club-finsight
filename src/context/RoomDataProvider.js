@@ -10,6 +10,7 @@ export const RoomDataProvider = ({ children }) => {
   return (
     <RoomDataContext.Provider
       value={{
+        allRooms: state.allRooms,
         room: state.room,
         members: state.members,
         messages: state.messages,

@@ -21,6 +21,7 @@ export default function Room() {
     dispatch,
   } = useRoomData();
   const [isCreator, setIsCreator] = useState(room?.creatorId === user?.uid);
+  const [pendingRequests, setPendingRequests] = useState(false);
 
   const toggleShowRequests = () => setShowRequests((val) => !val);
 
@@ -45,7 +46,7 @@ export default function Room() {
   };
 
   useEffect(() => {
-    contentEndEl.current.scrollIntoView({ behaviour: "smooth" });
+    contentEndEl?.current?.scrollIntoView({ behaviour: "smooth" });
     const unsubscribeRooms = db
       .collection("rooms")
       .doc(roomId)
@@ -71,6 +72,15 @@ export default function Room() {
         const messages = [];
         snapshot.forEach((doc) => messages.push(doc.data()));
         dispatch({ type: "INITIALIZE_MESSAGES", payload: messages });
+      });
+
+    db.collection("rooms")
+      .doc(roomId)
+      .collection("members")
+      .where("permissionStatus", "==", "requested")
+      .onSnapshot((snapshot) => {
+        console.log("Notif check", snapshot.size);
+        setPendingRequests(() => snapshot.size);
       });
 
     return () => {
@@ -142,6 +152,12 @@ export default function Room() {
       });
   };
 
+  const handleOpenRoom = () => {
+    db.collection("rooms").doc(roomId).update({
+      status: "open",
+    });
+  };
+
   return (
     <div>
       {showRequests ? (
@@ -154,54 +170,77 @@ export default function Room() {
           <div className={`${styles.header}`}>
             <div className={`container ${styles.headerContent}`}>
               <h1 className={`${styles.title}`}>{room.title}</h1>
-              {room?.creatorId === user?.uid && (
+              {
                 <button
                   onClick={toggleShowRequests}
-                  className={`btn btn-ghost btn-icon btn-small`}
+                  className={`btn btn-ghost btn-icon btn-small ${styles.menuButton}`}
                 >
+                  {pendingRequests ? (
+                    <div className={styles.notificationDot}></div>
+                  ) : (
+                    <></>
+                  )}
                   <img src="/icons/menu.svg" alt="menu" />
                 </button>
-              )}
+              }
             </div>
           </div>
-          <div className={`container ${styles.content}`}>
-            {messages.map((message) => (
-              <MessageCard key={message.id} message={message} />
-            ))}
-            <div ref={contentEndEl}></div>
-          </div>
-          {currentUser?.role !== "audience" ? (
-            <div
-              // onSubmit={(e) => createNewMessage(e)}
-              className={`container ${styles.newMessage}`}
-            >
-              <textarea
-                placeholder="Type your message..."
-                rows="1"
-                onChange={(e) =>
-                  dispatch({
-                    type: "UPDATE_NEW_MESSAGE",
-                    payload: e.target.value,
-                  })
-                }
-                className={`${styles.inputTextArea}`}
-                value={newMessage}
-              />
-              <button
-                onClick={(e) => createNewMessage(e)}
-                className={`btn btn-solid btn-icon btn-small ${styles.sendButton}`}
-              >
-                <img src="/icons/send.svg" alt="send" />
-              </button>
+          {room.status === "scheduled" ? (
+            <div className={styles.notOpenText}>
+              <h2>Room not opened by creator</h2>
             </div>
           ) : (
+            <div className={`container ${styles.content}`}>
+              {messages.map((message) => (
+                <MessageCard key={message.id} message={message} />
+              ))}
+              <div ref={contentEndEl}></div>
+            </div>
+          )}
+          {room.status !== "scheduled" && (
+            <>
+              {currentUser?.role !== "audience" ? (
+                <div
+                  // onSubmit={(e) => createNewMessage(e)}
+                  className={`container ${styles.newMessage}`}
+                >
+                  <textarea
+                    placeholder="Type your message..."
+                    rows="1"
+                    onChange={(e) =>
+                      dispatch({
+                        type: "UPDATE_NEW_MESSAGE",
+                        payload: e.target.value,
+                      })
+                    }
+                    className={`${styles.inputTextArea}`}
+                    value={newMessage}
+                  />
+                  <button
+                    onClick={(e) => createNewMessage(e)}
+                    className={`btn btn-solid btn-icon btn-small ${styles.sendButton}`}
+                  >
+                    <img src="/icons/send.svg" alt="send" />
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={handleRequest}
+                  className={`btn btn-solid btn-small btn-primary-gradient ${styles.requestToChatButton}`}
+                >
+                  {currentUser.permissionStatus === "none"
+                    ? "Request to Chat"
+                    : "Permission Requested"}
+                </button>
+              )}
+            </>
+          )}
+          {room.status === "scheduled" && currentUser?.role !== "audience" && (
             <button
-              onClick={handleRequest}
+              onClick={handleOpenRoom}
               className={`btn btn-solid btn-small btn-primary-gradient ${styles.requestToChatButton}`}
             >
-              {currentUser.permissionStatus === "none"
-                ? "Request to Chat"
-                : "Permission Requested"}
+              Open Room
             </button>
           )}
         </div>

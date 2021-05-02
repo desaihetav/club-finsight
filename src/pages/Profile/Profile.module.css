@@ -1,5 +1,6 @@
 .profilePage {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   justify-content: center;
   align-items: center;
@@ -163,4 +164,11 @@
   padding: 0.5rem 1rem;
   background: var(--color-background-3);
   border: none;
+}
+
+.logoutButton {
+  background-color: var(--color-status-error);
+  border-color: var(--color-status-error);
+  color: var(--color-text-1);
+  margin-top: 2rem;
 }

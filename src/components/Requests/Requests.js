@@ -12,17 +12,21 @@ const Requests = ({ state, user, toggleShowRequests }) => {
     dispatch,
   } = useRoomData();
 
-  const requests = members.filter(
+  const membersExcludingCreator = members.filter(
+    (member) => member.role !== "creator"
+  );
+
+  const requests = membersExcludingCreator.filter(
     (member) =>
       member.permissionStatus === "requested" && member.status === "active"
   );
 
-  const speakers = members.filter(
+  const speakers = membersExcludingCreator.filter(
     (member) =>
       member.permissionStatus === "granted" && member.status === "active"
   );
 
-  const audience = members.filter(
+  const audience = membersExcludingCreator.filter(
     (member) => member.permissionStatus === "none" && member.status === "active"
   );
 
@@ -31,14 +35,14 @@ const Requests = ({ state, user, toggleShowRequests }) => {
       <div className={`${styles.header}`}>
         <div className={`container ${styles.headerContent}`}>
           <h1 className={`${styles.title}`}>{room.title}</h1>
-          {room?.creatorId === user?.uid && (
+          {
             <button
               onClick={toggleShowRequests}
               className={`btn btn-ghost btn-icon btn-small`}
             >
-              <img src="/icons/menu.svg" alt="menu" />
+              <img src="/icons/cancel.svg" alt="menu" />
             </button>
-          )}
+          }
         </div>
       </div>
       {requests.length !== 0 && (
@@ -70,7 +74,7 @@ const Requests = ({ state, user, toggleShowRequests }) => {
 };
 
 const RequestCard = ({ member }) => {
-  const { db } = useFirebase();
+  const { db, user } = useFirebase();
   const { room } = useRoomData();
 
   const { uid, name, role, permissionStatus } = member;
@@ -94,15 +98,16 @@ const RequestCard = ({ member }) => {
       {role !== "creator" ? (
         <div className={`${styles.requestCard}`}>
           <p className={`${styles.requestName}`}>{name}</p>
-          {["granted", "requested"].includes(permissionStatus) && (
-            <button
-              onClick={revokePermissionToMemberById}
-              className={`btn btn-ghost btn-icon btn-small ${styles.requestActionButton}`}
-            >
-              <img src="/icons/cancel.svg" alt="cancel" />
-            </button>
-          )}
-          {permissionStatus === "requested" && (
+          {["granted", "requested"].includes(permissionStatus) &&
+            room.creatorId === user.uid && (
+              <button
+                onClick={revokePermissionToMemberById}
+                className={`btn btn-ghost btn-icon btn-small ${styles.requestActionButton}`}
+              >
+                <img src="/icons/cancel.svg" alt="cancel" />
+              </button>
+            )}
+          {permissionStatus === "requested" && room.creatorId === user.uid && (
             <button
               onClick={grantPermissionToMemberById}
               className={`btn btn-ghost btn-icon btn-small ${styles.requestActionButton}`}

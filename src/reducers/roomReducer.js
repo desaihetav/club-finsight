@@ -1,4 +1,5 @@
 export const initialState = {
+  allRooms: [],
   room: {},
   members: [],
   messages: [],
@@ -8,6 +9,8 @@ export const initialState = {
 
 export const roomReducer = (state, { type, payload }) => {
   switch (type) {
+    case "INITIALIZE_ALL_ROOMS":
+      return { ...state, allRooms: payload };
     case "INITIALIZE_ROOM":
       return { ...state, room: payload };
     case "INITIALIZE_MEMBERS":
