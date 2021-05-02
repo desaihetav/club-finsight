@@ -1,0 +1,38 @@
+.container {
+  background-color: var(--color-background-2);
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  max-width: 70vw;
+  width: fit-content;
+  border-radius: 1rem;
+}
+
+.alignRight {
+  align-self: flex-end;
+}
+
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: var(--color-text-2);
+  margin: 0;
+  font-size: 0.75rem;
+  width: fit-content;
+}
+
+.name,
+.timestamp {
+  margin: 0;
+}
+
+.seperator {
+  margin: 0 0.5rem;
+}
+
+.text {
+  color: var(--color-text-1);
+  font-size: 1.125rem;
+  margin: 0.25rem 0;
+  width: fit-content;
+}

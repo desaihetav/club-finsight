@@ -1,0 +1,47 @@
+.roomContainer {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
+.header {
+  padding: 1rem 0;
+  background-color: var(--color-background-3);
+  height: 5rem;
+}
+
+.content {
+  flex-shrink: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  margin: 0.5rem 0;
+}
+
+.newMessage {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-height: 5rem;
+  background-color: var(--color-background-1);
+}
+
+.newMessage > input {
+  flex-grow: 1;
+  border: 2px solid transparent;
+}
+
+.sendButton {
+  min-width: 3rem;
+  min-height: 3rem;
+  margin: 0.5rem 0 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem 0.75rem 0.75rem;
+}

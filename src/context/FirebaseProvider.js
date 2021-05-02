@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import { firebase } from "../config/firebase";
+import { firebaseApp } from "../config/firebase";
 
 const FirebaseContext = createContext(null);
 
 export const useFirebase = () => useContext(FirebaseContext);
 
 export const FirebaseProvider = ({ children }) => {
-  const auth = firebase.auth();
-  const db = firebase.firestore();
+  const auth = firebaseApp.auth();
+  const db = firebaseApp.firestore();
 
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("authUser"))
@@ -19,7 +19,7 @@ export const FirebaseProvider = ({ children }) => {
   }, []);
 
   const authListener = async () => {
-    return firebase.auth().onAuthStateChanged((authUser) => {
+    return auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         localStorage.setItem("authUser", JSON.stringify(authUser));
         db.collection("users")
@@ -38,7 +38,6 @@ export const FirebaseProvider = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         user: user,
-        firebase: firebase,
         auth: auth,
         db: db,
       }}

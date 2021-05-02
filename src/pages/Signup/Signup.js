@@ -10,8 +10,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [signupStatus, setSignupStatus] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { firebase, auth, user } = useFirebase();
-  const db = firebase.firestore();
+  const { db, auth, user } = useFirebase();
   const navigate = useNavigate();
 
   const usernameExists = async () => {
@@ -39,8 +38,7 @@ export default function Signup() {
         var user = response.user;
         console.log(user);
         console.log("Sign Up successful");
-        const firestoreResponse = await firebase
-          .firestore()
+        const firestoreResponse = await db
           .collection("users")
           .doc(user.uid)
           .set({

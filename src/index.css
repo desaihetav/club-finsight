@@ -5,7 +5,7 @@
 :root {
   --color-background-1: #0a0c0fff;
   --color-background-2: #1a1c1fff;
-  --color-background-3: #2a2c2fff;
+  --color-background-3: #25272aff;
 
   --color-text-1: #ffffffff;
   --color-text-2: #ebebf599;
@@ -33,6 +33,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-background-1);
   color: var(--color-text-1);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 code {

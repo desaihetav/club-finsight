@@ -8,17 +8,14 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState("Login");
   const [errorMessage, setErrorMessage] = useState("");
-  const { firebase, user } = useFirebase();
-  const db = firebase.firestore();
+  const { db, auth, user } = useFirebase();
   const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoginStatus("LOADING");
     try {
-      const response = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password);
+      const response = await auth.signInWithEmailAndPassword(email, password);
       console.log(response.user);
       const firestoreResponse = await db
         .collection("users")
