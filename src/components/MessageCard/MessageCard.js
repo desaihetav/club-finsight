@@ -37,7 +37,9 @@ export default function MessageCard({ message }) {
         user.uid === senderId && styles.alignRight
       }`}
     >
-      <p className={`${styles.text}`}>{text}</p>
+      {text.split("\n").map((textItem) => (
+        <p className={`${styles.text}`}>{textItem}</p>
+      ))}
       <div className={`${styles.metadata}`}>
         <p className={`${styles.name}`}>{senderName}</p>
         <p className={styles.seperator}>|</p>

@@ -3,6 +3,7 @@ export const initialState = {
   members: [],
   messages: [],
   newMessage: "",
+  currentUser: {},
 };
 
 export const roomReducer = (state, { type, payload }) => {
@@ -17,6 +18,8 @@ export const roomReducer = (state, { type, payload }) => {
       return { ...state, newMessage: payload };
     case "CLEAR_NEW_MESSAGE":
       return { ...state, newMessage: "" };
+    case "INITIALIZE_CURRENT_USER":
+      return { ...state, currentUser: payload };
     default:
       return state;
   }

@@ -37,6 +37,10 @@ body {
   min-height: -webkit-fill-available;
 }
 
+textarea {
+  min-height: 0;
+}
+
 html {
   height: -webkit-fill-available;
 }

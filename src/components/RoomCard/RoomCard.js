@@ -15,7 +15,6 @@ export default function RoomCard({ id, title, creatorId }) {
         .collection("members")
         .doc(creatorId)
         .onSnapshot((doc) => {
-          console.log(doc.data());
           setCreator(doc.data());
         });
     } catch (error) {
@@ -24,7 +23,6 @@ export default function RoomCard({ id, title, creatorId }) {
   };
 
   useEffect(() => {
-    console.log("here");
     initialiseCreator();
   }, []);
 

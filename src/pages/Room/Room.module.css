@@ -10,9 +10,17 @@
 }
 
 .header {
-  padding: 1rem 0;
+  display: flex;
+  align-items: center;
   background-color: var(--color-background-3);
   height: 5rem;
+}
+
+.headerContent {
+  padding: 1rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .content {
@@ -20,7 +28,7 @@
   display: flex;
   flex-direction: column-reverse;
   overflow-y: auto;
-  margin: 0.5rem 0;
+  margin: 0.5rem auto;
 }
 
 .newMessage {
@@ -31,17 +39,26 @@
   background-color: var(--color-background-1);
 }
 
-.newMessage > input {
+.inputTextArea {
   flex-grow: 1;
   border: 2px solid transparent;
+  border-radius: 1rem;
+  background-color: var(--color-background-2);
+  padding: 1rem 2rem;
+  color: var(--color-text-1);
+  resize: none;
 }
 
 .sendButton {
   min-width: 3rem;
   min-height: 3rem;
-  margin: 0.5rem 0 1rem 1rem;
+  margin: 1rem 0 1rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1rem 0.75rem 0.75rem;
+}
+
+.requestToChatButton {
+  margin: 1rem;
 }
