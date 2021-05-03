@@ -13,10 +13,10 @@ export default function Navbar() {
         </NavLink>
       </div>
       <div className={`${styles.linksRight}`}>
-        <NavLink className={styles.navLink} to="/search">
+        <NavLink className={styles.navLink} to="/history">
           <img src="/icons/history.svg" alt="history" />
         </NavLink>
-        <NavLink className={styles.navLink} to="/search">
+        <NavLink className={styles.navLink} to="/calendar">
           <img src="/icons/calendar.svg" alt="calendar" />
         </NavLink>
         <NavLink className={styles.navLink} to={`/profile/@${user.username}`}>

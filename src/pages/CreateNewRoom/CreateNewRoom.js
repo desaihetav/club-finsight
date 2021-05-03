@@ -6,8 +6,10 @@ import slugify from "react-slugify";
 
 import styles from "./CreateNewRoom.module.css";
 import { useFirebase } from "../../context/FirebaseProvider";
+import { useNavigate } from "react-router";
 
 export default function CreateNewRoom() {
+  const navigate = useNavigate();
   const [topic, setTopic] = useState("");
   const [date, setDate] = useState();
   const { db, user } = useFirebase();
@@ -18,16 +20,17 @@ export default function CreateNewRoom() {
   };
 
   const createNewRoom = () => {
-    const roomId = slugify(topic);
-    db.collection("rooms")
-      .doc(roomId)
-      .set({
-        id: roomId,
-        title: topic,
-        creatorId: user.uid,
-        status: "scheduled",
-        scheduledAt: new Date(date),
-      });
+    const roomId = slugify(topic) + v4();
+    const newRoom = {
+      id: roomId,
+      title: topic,
+      creatorId: user.uid,
+      status: "scheduled",
+      scheduledAt: new Date(date),
+      createdAt: new Date(Date.now()),
+      visibility: "private",
+    };
+    db.collection("rooms").doc(roomId).set(newRoom);
     db.collection("rooms").doc(roomId).collection("members").doc(user.uid).set({
       uid: user.uid,
       name: user.name,
@@ -35,9 +38,16 @@ export default function CreateNewRoom() {
       role: "creator",
       permissionStatus: "granted",
       status: "inactive",
-      visibility: "private",
     });
+    db.collection("users")
+      .doc(user.uid)
+      .collection("attendedRooms")
+      .doc(roomId)
+      .set(newRoom);
     console.log("Room Created");
+    setTopic("");
+    setDate(null);
+    navigate(`/room/${roomId}`, { replace: true });
   };
 
   return (

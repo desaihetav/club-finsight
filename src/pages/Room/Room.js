@@ -118,6 +118,12 @@ export default function Room() {
             status: "active",
             permissionStatus: "none",
           });
+        if (room !== {})
+          db.collection("users")
+            .doc(user?.uid)
+            .collection("attendedRooms")
+            .doc(room?.id)
+            .set(room);
       } else {
         db.collection("rooms")
           .doc(roomId)
@@ -169,8 +175,8 @@ export default function Room() {
         >
           <div className={`${styles.header}`}>
             <div className={`container ${styles.headerContent}`}>
-              <h1 className={`${styles.title}`}>{room.title}</h1>
-              {
+              <h1 className={`${styles.title}`}>{room?.title}</h1>
+              {!["scheduled", "archieved"].includes(room.status) && (
                 <button
                   onClick={toggleShowRequests}
                   className={`btn btn-ghost btn-icon btn-small ${styles.menuButton}`}
@@ -182,7 +188,7 @@ export default function Room() {
                   )}
                   <img src="/icons/menu.svg" alt="menu" />
                 </button>
-              }
+              )}
             </div>
           </div>
           {room.status === "scheduled" ? (
@@ -197,7 +203,7 @@ export default function Room() {
               <div ref={contentEndEl}></div>
             </div>
           )}
-          {room.status !== "scheduled" && (
+          {!["scheduled", "archieved"].includes(room.status) && (
             <>
               {currentUser?.role !== "audience" ? (
                 <div

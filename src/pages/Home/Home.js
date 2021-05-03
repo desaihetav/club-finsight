@@ -74,6 +74,7 @@ export default function Home() {
       <div className={`container ${styles.roomsContainer}`}>
         {allRooms
           ?.filter((room) => room.status !== "archieved")
+          .sort((a, b) => a.status > b.status)
           .map((room) => (
             <RoomCard key={room.id} room={room} />
           ))}
